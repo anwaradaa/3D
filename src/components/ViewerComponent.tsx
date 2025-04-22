@@ -39,6 +39,23 @@ const ViewerComponent: React.FC<ViewerComponentProps> = ({ className }) => {
     // Build the scene with the specified resources
     controller.build(modelResource, hdrResource)
       .then(() => {
+
+     const secondModelResource: Resource = {
+        id: 'backgammon2',
+        type: 'glb',
+        url: '/assets/model/Backgammon2.glb',
+      };
+
+      const model2 = await controller.loadModel(secondModelResource);
+      
+      // Move second model upward (Y-axis)
+      model2.position.set(0, 5, 0); // Adjust Y as needed
+
+      // Add to scene
+      controller.scene.add(model2);
+
+
+        
         // Set loading to false when resources are loaded
         setIsLoading(false);
       })
